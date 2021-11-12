@@ -16,12 +16,18 @@ enum APIError: Error {
     case unknownError
 }
 
-struct Qiita: Codable {
-    let title: String
+struct Qiita: Decodable {
+    var title: String
+    init(title: String) {
+        self.title = title
+    }
 }
 
-struct GitHub: Codable {
-    let name: String
+struct GitHub: Decodable {
+    var name: String
+    init(name: String) {
+        self.name = name
+    }
 }
 
 final class APIClient {

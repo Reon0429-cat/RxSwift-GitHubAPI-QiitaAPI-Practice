@@ -16,6 +16,8 @@ protocol ViewModelInput {
 protocol ViewModelOutput: AnyObject {
     var qiitas: Driver<[Qiita]> { get }
     var gitHubs: Driver<[GitHub]> { get }
+    var isCombineButtonEnabled: Driver<Bool> { get }
+    var combineTexts: Driver<[String]> { get }
 }
 
 protocol ViewModelType {
@@ -29,9 +31,14 @@ final class ViewModel {
     private let useCase = UseCase()
     private let qiitasRelay = BehaviorRelay<[Qiita]>(value: [])
     private let gitHubsRelay = BehaviorRelay<[GitHub]>(value: [])
-
-    init(fetchQiitaButton: Signal<Void>,
-         fetchGitHubButton: Signal<Void>) {
+    private let combineTextsRelay = BehaviorRelay<[String]>(value: [])
+    private let isCombineButtonEnabledRelay = BehaviorRelay<Bool>(value: false)
+    
+    init(
+        fetchQiitaButton: Signal<Void>,
+        fetchGitHubButton: Signal<Void>,
+        combineButton: Signal<Void>
+    ) {
         // Input from VC
         fetchQiitaButton.asObservable()
             .subscribe(onNext: useCase.fetchQiitaData)
@@ -41,8 +48,22 @@ final class ViewModel {
             .subscribe(onNext: useCase.fetchGitHubData)
             .disposed(by: disposeBag)
         
+        combineButton.asObservable()
+            .subscribe(onNext: {
+                let text = zip(
+                    self.qiitasRelay.value,
+                    self.gitHubsRelay.value
+                ).map {
+                    $0.title.prefix(5).description
+                    + $1.name.prefix(5).description
+                }
+                self.combineTextsRelay.accept(text)
+            })
+            .disposed(by: disposeBag)
+        
         // Output from UseCase
         useCase.qiitas
+            .map { $0.map { Qiita(title: $0.title.prefix(5).description) } }
             .drive(qiitasRelay)
             .disposed(by: disposeBag)
         
@@ -51,6 +72,7 @@ final class ViewModel {
             .disposed(by: disposeBag)
         
         useCase.gitHubs
+            .map { $0.map { GitHub(name: $0.name.prefix(5).description) } }
             .drive(gitHubsRelay)
             .disposed(by: disposeBag)
         
@@ -75,6 +97,18 @@ extension ViewModel: ViewModelOutput {
     
     var gitHubs: Driver<[GitHub]> {
         gitHubsRelay.asDriver()
+    }
+    
+    var combineTexts: Driver<[String]> {
+        combineTextsRelay.asDriver()
+    }
+    
+    var isCombineButtonEnabled: Driver<Bool> {
+        Observable.combineLatest(
+            qiitasRelay.asObservable(),
+            gitHubsRelay.asObservable()
+        ).map { !$0.isEmpty && !$1.isEmpty }
+        .asDriver(onErrorDriveWith: .empty())
     }
     
 }

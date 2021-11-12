@@ -22,7 +22,8 @@ final class ViewController: UIViewController {
     
     private lazy var viewModel: ViewModelType = ViewModel(
         fetchQiitaButton: fetchQiitaButton.rx.tap.asSignal(),
-        fetchGitHubButton: fetchGitHubButton.rx.tap.asSignal()
+        fetchGitHubButton: fetchGitHubButton.rx.tap.asSignal(),
+        combineButton: combineButton.rx.tap.asSignal()
     )
     private let disposeBag = DisposeBag()
     
@@ -57,6 +58,22 @@ final class ViewController: UIViewController {
                 cell.configure(text: element.name)
             }
             .disposed(by: disposeBag)
+        
+        viewModel.outputs.combineTexts
+            .drive(
+                combineTableView.rx.items(
+                    cellIdentifier: CustomTableViewCell.identifier,
+                    cellType: CustomTableViewCell.self
+                )
+            ) { row, element, cell in
+                cell.configure(text: element)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.outputs.isCombineButtonEnabled
+            .drive(combineButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
     }
     
     private func setupTableView() {

@@ -15,7 +15,7 @@ final class CustomTableViewCell: UITableViewCell {
     static var nib: UINib { UINib(nibName: String(describing: self), bundle: nil) }
     
     func configure(text: String) {
-        nameLabel.text = text.prefix(5).description
+        nameLabel.text = text
     }
     
 }
