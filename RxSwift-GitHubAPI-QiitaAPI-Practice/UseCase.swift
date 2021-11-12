@@ -14,6 +14,9 @@ final class UseCase {
     private let fetchQiitaDataTrigger = PublishRelay<Void>()
     private let qiitasRelay = BehaviorRelay<[Qiita]>(value: [])
     private let qiitaErrorRelay = PublishRelay<Error>()
+    private let fetchGitHubDataTrigger = PublishRelay<Void>()
+    private let gitHubsRelay = BehaviorRelay<[GitHub]>(value: [])
+    private let gitHubErrorRelay = PublishRelay<Error>()
     private let disposeBag = DisposeBag()
     
     var qiitas: Driver<[Qiita]> {
@@ -22,6 +25,14 @@ final class UseCase {
     
     var qiitaError: Driver<Error> {
         qiitaErrorRelay.asDriver(onErrorDriveWith: .empty())
+    }
+    
+    var gitHubs: Driver<[GitHub]> {
+        gitHubsRelay.asDriver()
+    }
+    
+    var gitHubError: Driver<Error> {
+        gitHubErrorRelay.asDriver(onErrorDriveWith: .empty())
     }
     
     init() {
@@ -36,10 +47,26 @@ final class UseCase {
                     .disposed(by: self.disposeBag)
             })
             .disposed(by: disposeBag)
+        
+        fetchGitHubDataTrigger
+            .subscribe(onNext: {
+                APIClient().fetchGitHubData()
+                    .subscribe { gitHubs in
+                        self.gitHubsRelay.accept(gitHubs)
+                    } onFailure: { error in
+                        self.gitHubErrorRelay.accept(error)
+                    }
+                    .disposed(by: self.disposeBag)
+            })
+            .disposed(by: disposeBag)
     }
     
     func fetchQiitaData() {
         fetchQiitaDataTrigger.accept(())
+    }
+    
+    func fetchGitHubData() {
+        fetchGitHubDataTrigger.accept(())
     }
     
 }

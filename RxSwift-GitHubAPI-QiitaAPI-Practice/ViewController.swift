@@ -21,7 +21,8 @@ final class ViewController: UIViewController {
     @IBOutlet private weak var combineTableView: UITableView!
     
     private lazy var viewModel: ViewModelType = ViewModel(
-        fetchQiitaButton: fetchQiitaButton.rx.tap.asSignal()
+        fetchQiitaButton: fetchQiitaButton.rx.tap.asSignal(),
+        fetchGitHubButton: fetchGitHubButton.rx.tap.asSignal()
     )
     private let disposeBag = DisposeBag()
     
@@ -45,11 +46,29 @@ final class ViewController: UIViewController {
                 cell.configure(text: element.title)
             }
             .disposed(by: disposeBag)
+        
+        viewModel.outputs.gitHubs
+            .drive(
+                gitHubTableView.rx.items(
+                    cellIdentifier: CustomTableViewCell.identifier,
+                    cellType: CustomTableViewCell.self
+                )
+            ) { row, element, cell in
+                cell.configure(text: element.name)
+            }
+            .disposed(by: disposeBag)
     }
     
     private func setupTableView() {
         qiitaTableView.register(CustomTableViewCell.nib,
                                 forCellReuseIdentifier: CustomTableViewCell.identifier)
+        gitHubTableView.register(CustomTableViewCell.nib,
+                                 forCellReuseIdentifier: CustomTableViewCell.identifier)
+        combineTableView.register(CustomTableViewCell.nib,
+                                  forCellReuseIdentifier: CustomTableViewCell.identifier)
+        qiitaTableView.rowHeight = 60
+        gitHubTableView.rowHeight = 60
+        combineTableView.rowHeight = 60
     }
     
 }
