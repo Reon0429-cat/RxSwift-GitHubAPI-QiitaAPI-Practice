@@ -18,6 +18,11 @@
 		AB87269E273E97DC0094544E /* RxSwift_GitHubAPI_QiitaAPI_PracticeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB87269D273E97DC0094544E /* RxSwift_GitHubAPI_QiitaAPI_PracticeTests.swift */; };
 		AB8726A8273E97DC0094544E /* RxSwift_GitHubAPI_QiitaAPI_PracticeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8726A7273E97DC0094544E /* RxSwift_GitHubAPI_QiitaAPI_PracticeUITests.swift */; };
 		AB8726AA273E97DC0094544E /* RxSwift_GitHubAPI_QiitaAPI_PracticeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8726A9273E97DC0094544E /* RxSwift_GitHubAPI_QiitaAPI_PracticeUITestsLaunchTests.swift */; };
+		AB8726B7273E9F800094544E /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8726B6273E9F800094544E /* ViewModel.swift */; };
+		AB8726B9273EA32B0094544E /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8726B8273EA32B0094544E /* APIClient.swift */; };
+		AB8726BB273EA3380094544E /* UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8726BA273EA3380094544E /* UseCase.swift */; };
+		AB8726BE273EAF880094544E /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8726BC273EAF880094544E /* CustomTableViewCell.swift */; };
+		AB8726BF273EAF880094544E /* CustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB8726BD273EAF880094544E /* CustomTableViewCell.xib */; };
 		FEC4D3C87AC566BFEB42F237 /* Pods_RxSwift_GitHubAPI_QiitaAPI_Practice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEA1E5BB7403F0F16AE6932E /* Pods_RxSwift_GitHubAPI_QiitaAPI_Practice.framework */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +62,11 @@
 		AB8726A3273E97DC0094544E /* RxSwift-GitHubAPI-QiitaAPI-PracticeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "RxSwift-GitHubAPI-QiitaAPI-PracticeUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB8726A7273E97DC0094544E /* RxSwift_GitHubAPI_QiitaAPI_PracticeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxSwift_GitHubAPI_QiitaAPI_PracticeUITests.swift; sourceTree = "<group>"; };
 		AB8726A9273E97DC0094544E /* RxSwift_GitHubAPI_QiitaAPI_PracticeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxSwift_GitHubAPI_QiitaAPI_PracticeUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		AB8726B6273E9F800094544E /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		AB8726B8273EA32B0094544E /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		AB8726BA273EA3380094544E /* UseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCase.swift; sourceTree = "<group>"; };
+		AB8726BC273EAF880094544E /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		AB8726BD273EAF880094544E /* CustomTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomTableViewCell.xib; sourceTree = "<group>"; };
 		D0D2AE61E70644AABC5673F5 /* Pods-RxSwift-GitHubAPI-QiitaAPI-Practice.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxSwift-GitHubAPI-QiitaAPI-Practice.debug.xcconfig"; path = "Target Support Files/Pods-RxSwift-GitHubAPI-QiitaAPI-Practice/Pods-RxSwift-GitHubAPI-QiitaAPI-Practice.debug.xcconfig"; sourceTree = "<group>"; };
 		DC01E37926536834FC29DE70 /* Pods-RxSwift-GitHubAPI-QiitaAPI-Practice.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxSwift-GitHubAPI-QiitaAPI-Practice.release.xcconfig"; path = "Target Support Files/Pods-RxSwift-GitHubAPI-QiitaAPI-Practice/Pods-RxSwift-GitHubAPI-QiitaAPI-Practice.release.xcconfig"; sourceTree = "<group>"; };
 		E786B79F860EBC0EF8A712A1 /* Pods_RxSwift_GitHubAPI_QiitaAPI_PracticeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RxSwift_GitHubAPI_QiitaAPI_PracticeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -111,7 +121,6 @@
 				7F9BE0CE7F4CEBB4E0140F4B /* Pods-RxSwift-GitHubAPI-QiitaAPI-PracticeTests.debug.xcconfig */,
 				9606A1D6D9F783D88EE4310D /* Pods-RxSwift-GitHubAPI-QiitaAPI-PracticeTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -143,6 +152,11 @@
 				AB872686273E97DA0094544E /* AppDelegate.swift */,
 				AB872688273E97DA0094544E /* SceneDelegate.swift */,
 				AB87268A273E97DA0094544E /* ViewController.swift */,
+				AB8726BC273EAF880094544E /* CustomTableViewCell.swift */,
+				AB8726BD273EAF880094544E /* CustomTableViewCell.xib */,
+				AB8726B8273EA32B0094544E /* APIClient.swift */,
+				AB8726BA273EA3380094544E /* UseCase.swift */,
+				AB8726B6273E9F800094544E /* ViewModel.swift */,
 				AB87268C273E97DA0094544E /* Main.storyboard */,
 				AB87268F273E97DC0094544E /* Assets.xcassets */,
 				AB872691273E97DC0094544E /* LaunchScreen.storyboard */,
@@ -279,6 +293,7 @@
 			files = (
 				AB872693273E97DC0094544E /* LaunchScreen.storyboard in Resources */,
 				AB872690273E97DC0094544E /* Assets.xcassets in Resources */,
+				AB8726BF273EAF880094544E /* CustomTableViewCell.xib in Resources */,
 				AB87268E273E97DA0094544E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -409,6 +424,10 @@
 			files = (
 				AB87268B273E97DA0094544E /* ViewController.swift in Sources */,
 				AB872687273E97DA0094544E /* AppDelegate.swift in Sources */,
+				AB8726B7273E9F800094544E /* ViewModel.swift in Sources */,
+				AB8726BE273EAF880094544E /* CustomTableViewCell.swift in Sources */,
+				AB8726BB273EA3380094544E /* UseCase.swift in Sources */,
+				AB8726B9273EA32B0094544E /* APIClient.swift in Sources */,
 				AB872689273E97DA0094544E /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

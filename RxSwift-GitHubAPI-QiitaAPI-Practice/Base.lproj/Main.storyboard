@@ -1,24 +1,139 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="RxSwift_GitHubAPI_QiitaAPI_Practice" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="KbW-RW-JgX">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="yV3-Uy-NgT">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="409"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WUW-xA-wpJ">
+                                                <rect key="frame" x="0.0" y="0.0" width="207" height="409"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qzO-ay-qJg">
+                                                        <rect key="frame" x="58" y="10" width="91" height="31"/>
+                                                        <color key="backgroundColor" systemColor="systemRedColor"/>
+                                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="fetch Qiita"/>
+                                                    </button>
+                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="RQ4-xE-xFU">
+                                                        <rect key="frame" x="0.0" y="51" width="207" height="358"/>
+                                                        <color key="backgroundColor" systemColor="systemRedColor"/>
+                                                    </tableView>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstItem="RQ4-xE-xFU" firstAttribute="top" secondItem="qzO-ay-qJg" secondAttribute="bottom" constant="10" id="3mb-dq-DWm"/>
+                                                    <constraint firstAttribute="trailing" secondItem="RQ4-xE-xFU" secondAttribute="trailing" id="JND-P4-OtW"/>
+                                                    <constraint firstAttribute="bottom" secondItem="RQ4-xE-xFU" secondAttribute="bottom" id="PUy-C8-FWG"/>
+                                                    <constraint firstItem="RQ4-xE-xFU" firstAttribute="leading" secondItem="WUW-xA-wpJ" secondAttribute="leading" id="YZi-YH-Jiv"/>
+                                                    <constraint firstItem="qzO-ay-qJg" firstAttribute="top" secondItem="WUW-xA-wpJ" secondAttribute="top" constant="10" id="eQK-nR-cd0"/>
+                                                    <constraint firstItem="qzO-ay-qJg" firstAttribute="centerX" secondItem="WUW-xA-wpJ" secondAttribute="centerX" id="zln-5W-PIF"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2wM-nJ-UK0">
+                                                <rect key="frame" x="207" y="0.0" width="207" height="409"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hAE-9g-qoS">
+                                                        <rect key="frame" x="50.5" y="10" width="106.5" height="31"/>
+                                                        <color key="backgroundColor" systemColor="systemTealColor"/>
+                                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="fetch GitHub"/>
+                                                    </button>
+                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="QUf-D0-7MS">
+                                                        <rect key="frame" x="0.0" y="51" width="207" height="358"/>
+                                                        <color key="backgroundColor" systemColor="systemTealColor"/>
+                                                    </tableView>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="QUf-D0-7MS" secondAttribute="bottom" id="7pK-79-jZT"/>
+                                                    <constraint firstItem="hAE-9g-qoS" firstAttribute="centerX" secondItem="2wM-nJ-UK0" secondAttribute="centerX" id="AtS-xf-1PU"/>
+                                                    <constraint firstAttribute="trailing" secondItem="QUf-D0-7MS" secondAttribute="trailing" id="BZx-L6-cRV"/>
+                                                    <constraint firstItem="QUf-D0-7MS" firstAttribute="top" secondItem="hAE-9g-qoS" secondAttribute="bottom" constant="10" id="bqQ-KM-ObG"/>
+                                                    <constraint firstItem="hAE-9g-qoS" firstAttribute="top" secondItem="2wM-nJ-UK0" secondAttribute="top" constant="10" id="gHf-1y-FR0"/>
+                                                    <constraint firstItem="QUf-D0-7MS" firstAttribute="leading" secondItem="2wM-nJ-UK0" secondAttribute="leading" id="xV7-hP-tbg"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BRm-04-EwI">
+                                        <rect key="frame" x="0.0" y="409" width="414" height="409"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dRu-r5-qbo">
+                                                <rect key="frame" x="180.5" y="10" width="53" height="31"/>
+                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="合成"/>
+                                            </button>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="aPP-bb-FaK">
+                                                <rect key="frame" x="0.0" y="51" width="414" height="358"/>
+                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </tableView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="dRu-r5-qbo" firstAttribute="centerX" secondItem="BRm-04-EwI" secondAttribute="centerX" id="IXI-EP-Cv7"/>
+                                            <constraint firstAttribute="bottom" secondItem="aPP-bb-FaK" secondAttribute="bottom" id="JqQ-eJ-I9V"/>
+                                            <constraint firstItem="aPP-bb-FaK" firstAttribute="leading" secondItem="BRm-04-EwI" secondAttribute="leading" id="kOT-0g-n0G"/>
+                                            <constraint firstItem="aPP-bb-FaK" firstAttribute="top" secondItem="dRu-r5-qbo" secondAttribute="bottom" constant="10" id="m8q-HD-V8S"/>
+                                            <constraint firstAttribute="trailing" secondItem="aPP-bb-FaK" secondAttribute="trailing" id="oKh-H5-iUV"/>
+                                            <constraint firstItem="dRu-r5-qbo" firstAttribute="top" secondItem="BRm-04-EwI" secondAttribute="top" constant="10" id="qJq-Sd-3gq"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="KbW-RW-JgX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Sya-uL-gsd"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="KbW-RW-JgX" secondAttribute="bottom" id="d8p-wN-oml"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="KbW-RW-JgX" secondAttribute="trailing" id="oyo-7S-AO1"/>
+                            <constraint firstItem="KbW-RW-JgX" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="qH4-pg-tm2"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="combineButton" destination="dRu-r5-qbo" id="Zbx-gf-oKz"/>
+                        <outlet property="combineTableView" destination="aPP-bb-FaK" id="utP-JN-uBx"/>
+                        <outlet property="fetchGitHubButton" destination="hAE-9g-qoS" id="iqj-hZ-iWL"/>
+                        <outlet property="fetchQiitaButton" destination="qzO-ay-qJg" id="IT8-47-u5f"/>
+                        <outlet property="gitHubTableView" destination="QUf-D0-7MS" id="HTp-Xm-4nN"/>
+                        <outlet property="qiitaTableView" destination="RQ4-xE-xFU" id="9s2-N5-8sv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="101" y="113"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemTealColor">
+            <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>
