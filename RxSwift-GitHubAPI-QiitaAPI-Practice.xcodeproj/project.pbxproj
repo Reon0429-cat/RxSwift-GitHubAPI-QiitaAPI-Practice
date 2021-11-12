@@ -23,6 +23,8 @@
 		AB8726BB273EA3380094544E /* UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8726BA273EA3380094544E /* UseCase.swift */; };
 		AB8726BE273EAF880094544E /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8726BC273EAF880094544E /* CustomTableViewCell.swift */; };
 		AB8726BF273EAF880094544E /* CustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB8726BD273EAF880094544E /* CustomTableViewCell.xib */; };
+		AB8726C1273F1EDA0094544E /* Qiita.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8726C0273F1EDA0094544E /* Qiita.swift */; };
+		AB8726C3273F1EDF0094544E /* GitHub.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8726C2273F1EDF0094544E /* GitHub.swift */; };
 		FEC4D3C87AC566BFEB42F237 /* Pods_RxSwift_GitHubAPI_QiitaAPI_Practice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEA1E5BB7403F0F16AE6932E /* Pods_RxSwift_GitHubAPI_QiitaAPI_Practice.framework */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +69,8 @@
 		AB8726BA273EA3380094544E /* UseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCase.swift; sourceTree = "<group>"; };
 		AB8726BC273EAF880094544E /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		AB8726BD273EAF880094544E /* CustomTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomTableViewCell.xib; sourceTree = "<group>"; };
+		AB8726C0273F1EDA0094544E /* Qiita.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Qiita.swift; sourceTree = "<group>"; };
+		AB8726C2273F1EDF0094544E /* GitHub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHub.swift; sourceTree = "<group>"; };
 		D0D2AE61E70644AABC5673F5 /* Pods-RxSwift-GitHubAPI-QiitaAPI-Practice.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxSwift-GitHubAPI-QiitaAPI-Practice.debug.xcconfig"; path = "Target Support Files/Pods-RxSwift-GitHubAPI-QiitaAPI-Practice/Pods-RxSwift-GitHubAPI-QiitaAPI-Practice.debug.xcconfig"; sourceTree = "<group>"; };
 		DC01E37926536834FC29DE70 /* Pods-RxSwift-GitHubAPI-QiitaAPI-Practice.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxSwift-GitHubAPI-QiitaAPI-Practice.release.xcconfig"; path = "Target Support Files/Pods-RxSwift-GitHubAPI-QiitaAPI-Practice/Pods-RxSwift-GitHubAPI-QiitaAPI-Practice.release.xcconfig"; sourceTree = "<group>"; };
 		E786B79F860EBC0EF8A712A1 /* Pods_RxSwift_GitHubAPI_QiitaAPI_PracticeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RxSwift_GitHubAPI_QiitaAPI_PracticeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -149,15 +153,13 @@
 		AB872685273E97DA0094544E /* RxSwift-GitHubAPI-QiitaAPI-Practice */ = {
 			isa = PBXGroup;
 			children = (
+				AB8726CA273F1F510094544E /* APIClient */,
+				AB8726C4273F1EF40094544E /* Entities */,
+				AB8726C7273F1F130094544E /* UseCases */,
+				AB8726C6273F1F0E0094544E /* ViewModels */,
+				AB8726C5273F1F090094544E /* Views */,
 				AB872686273E97DA0094544E /* AppDelegate.swift */,
 				AB872688273E97DA0094544E /* SceneDelegate.swift */,
-				AB87268A273E97DA0094544E /* ViewController.swift */,
-				AB8726BC273EAF880094544E /* CustomTableViewCell.swift */,
-				AB8726BD273EAF880094544E /* CustomTableViewCell.xib */,
-				AB8726B8273EA32B0094544E /* APIClient.swift */,
-				AB8726BA273EA3380094544E /* UseCase.swift */,
-				AB8726B6273E9F800094544E /* ViewModel.swift */,
-				AB87268C273E97DA0094544E /* Main.storyboard */,
 				AB87268F273E97DC0094544E /* Assets.xcassets */,
 				AB872691273E97DC0094544E /* LaunchScreen.storyboard */,
 				AB872694273E97DC0094544E /* Info.plist */,
@@ -180,6 +182,50 @@
 				AB8726A9273E97DC0094544E /* RxSwift_GitHubAPI_QiitaAPI_PracticeUITestsLaunchTests.swift */,
 			);
 			path = "RxSwift-GitHubAPI-QiitaAPI-PracticeUITests";
+			sourceTree = "<group>";
+		};
+		AB8726C4273F1EF40094544E /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				AB8726C0273F1EDA0094544E /* Qiita.swift */,
+				AB8726C2273F1EDF0094544E /* GitHub.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		AB8726C5273F1F090094544E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AB87268C273E97DA0094544E /* Main.storyboard */,
+				AB87268A273E97DA0094544E /* ViewController.swift */,
+				AB8726BC273EAF880094544E /* CustomTableViewCell.swift */,
+				AB8726BD273EAF880094544E /* CustomTableViewCell.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		AB8726C6273F1F0E0094544E /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				AB8726B6273E9F800094544E /* ViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		AB8726C7273F1F130094544E /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				AB8726BA273EA3380094544E /* UseCase.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		AB8726CA273F1F510094544E /* APIClient */ = {
+			isa = PBXGroup;
+			children = (
+				AB8726B8273EA32B0094544E /* APIClient.swift */,
+			);
+			path = APIClient;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -428,6 +474,8 @@
 				AB8726BE273EAF880094544E /* CustomTableViewCell.swift in Sources */,
 				AB8726BB273EA3380094544E /* UseCase.swift in Sources */,
 				AB8726B9273EA32B0094544E /* APIClient.swift in Sources */,
+				AB8726C3273F1EDF0094544E /* GitHub.swift in Sources */,
+				AB8726C1273F1EDA0094544E /* Qiita.swift in Sources */,
 				AB872689273E97DA0094544E /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
