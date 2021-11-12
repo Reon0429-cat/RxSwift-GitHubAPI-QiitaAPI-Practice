@@ -9,8 +9,6 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-// fetch Qiitaボタンタップ後、Qiitaのリポジトリ名を5件取得し、テーブルに反映する
-
 final class ViewController: UIViewController {
     
     @IBOutlet private weak var fetchQiitaButton: UIButton!

@@ -37,27 +37,27 @@ final class UseCase {
     
     init() {
         fetchQiitaDataTrigger
-            .subscribe(onNext: {
+            .map {
                 APIClient().fetchQiitaData()
-                    .subscribe { qiitas in
-                        self.qiitasRelay.accept(qiitas)
-                    } onFailure: { error in
-                        self.qiitaErrorRelay.accept(error)
-                    }
+                    .subscribe(
+                        onSuccess: self.qiitasRelay.accept(_:),
+                        onFailure: self.qiitaErrorRelay.accept(_:)
+                    )
                     .disposed(by: self.disposeBag)
-            })
+            }
+            .subscribe()
             .disposed(by: disposeBag)
         
         fetchGitHubDataTrigger
-            .subscribe(onNext: {
+            .map {
                 APIClient().fetchGitHubData()
-                    .subscribe { gitHubs in
-                        self.gitHubsRelay.accept(gitHubs)
-                    } onFailure: { error in
-                        self.gitHubErrorRelay.accept(error)
-                    }
+                    .subscribe(
+                        onSuccess: self.gitHubsRelay.accept(_:),
+                        onFailure: self.gitHubErrorRelay.accept(_:)
+                    )
                     .disposed(by: self.disposeBag)
-            })
+            }
+            .subscribe()
             .disposed(by: disposeBag)
     }
     
