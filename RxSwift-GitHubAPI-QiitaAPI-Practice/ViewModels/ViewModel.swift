@@ -28,24 +28,39 @@ protocol ViewModelType {
 final class ViewModel {
     
     private let disposeBag = DisposeBag()
-    private let useCase = UseCase()
     private let qiitasRelay = BehaviorRelay<[Qiita]>(value: [])
     private let gitHubsRelay = BehaviorRelay<[GitHub]>(value: [])
     private let combineTextsRelay = BehaviorRelay<[String]>(value: [])
     private let isCombineButtonEnabledRelay = BehaviorRelay<Bool>(value: false)
     
     init(
+        useCase: UseCase,
         fetchQiitaButton: Signal<Void>,
         fetchGitHubButton: Signal<Void>,
         combineButton: Signal<Void>
     ) {
-        // Input from VC
         fetchQiitaButton.asObservable()
-            .subscribe(onNext: useCase.fetchQiitaData)
+            .subscribe(onNext: {
+                useCase.fetchQiitaData()
+                    .map { $0.map { Qiita(title: $0.title.prefix(5).description) } }
+                    .subscribe(
+                        onSuccess: { self.qiitasRelay.accept($0) },
+                        onFailure: { print($0.localizedDescription) }
+                    )
+                    .disposed(by: self.disposeBag)
+            })
             .disposed(by: disposeBag)
         
         fetchGitHubButton.asObservable()
-            .subscribe(onNext: useCase.fetchGitHubData)
+            .subscribe(onNext: {
+                useCase.fetchGitHubData()
+                    .map { $0.map { GitHub(name: $0.name.prefix(5).description) } }
+                    .subscribe(
+                        onSuccess: { self.gitHubsRelay.accept($0) },
+                        onFailure: { print($0.localizedDescription) }
+                    )
+                    .disposed(by: self.disposeBag)
+            })
             .disposed(by: disposeBag)
         
         combineButton.asObservable()
@@ -55,26 +70,6 @@ final class ViewModel {
             }
             .bind(to: combineTextsRelay)
             .disposed(by: disposeBag)
-        
-        // Output from UseCase
-        useCase.qiitas
-            .map { $0.map { $0.map { Qiita(title: $0.title.prefix(5).description) } } }
-            .drive {
-                $0.subscribe(
-                    onSuccess: { self.qiitasRelay.accept($0) },
-                    onFailure: { print($0.localizedDescription) }
-                ).disposed(by: self.disposeBag)
-            }.disposed(by: disposeBag)
-        
-        useCase.gitHubs
-            .map { $0.map { $0.map { GitHub(name: $0.name.prefix(5).description) } } }
-            .drive {
-                $0.subscribe(
-                    onSuccess: { self.gitHubsRelay.accept($0) },
-                    onFailure: { print($0.localizedDescription) }
-                ).disposed(by: self.disposeBag)
-            }.disposed(by: disposeBag)
-        
     }
     
 }

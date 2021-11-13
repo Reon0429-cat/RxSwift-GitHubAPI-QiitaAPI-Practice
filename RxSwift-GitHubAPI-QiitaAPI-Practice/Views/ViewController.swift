@@ -18,7 +18,9 @@ final class ViewController: UIViewController {
     @IBOutlet private weak var gitHubTableView: UITableView!
     @IBOutlet private weak var combineTableView: UITableView!
     
+    private let useCase = UseCase()
     private lazy var viewModel: ViewModelType = ViewModel(
+        useCase: useCase,
         fetchQiitaButton: fetchQiitaButton.rx.tap.asSignal(),
         fetchGitHubButton: fetchGitHubButton.rx.tap.asSignal(),
         combineButton: combineButton.rx.tap.asSignal()

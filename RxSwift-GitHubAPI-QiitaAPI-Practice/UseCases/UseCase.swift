@@ -11,38 +11,14 @@ import RxCocoa
 
 final class UseCase {
     
-    private let fetchQiitaDataTrigger = PublishRelay<Void>()
-    private let fetchGitHubDataTrigger = PublishRelay<Void>()
-    private let qiitasRelay = BehaviorRelay<Single<[Qiita]>>(value: .just([]))
-    private let gitHubsRelay = BehaviorRelay<Single<[GitHub]>>(value: .just([]))
     private let disposeBag = DisposeBag()
     
-    var qiitas: Driver<Single<[Qiita]>> {
-        qiitasRelay.asDriver()
+    func fetchQiitaData() -> Single<[Qiita]> {
+        APIClient().fetchQiitaData()
     }
     
-    var gitHubs: Driver<Single<[GitHub]>> {
-        gitHubsRelay.asDriver()
-    }
-    
-    init() {
-        fetchQiitaDataTrigger
-            .flatMap { APIClient().fetchQiitaData() }
-            .subscribe(onNext: { self.qiitasRelay.accept(.just($0)) })
-            .disposed(by: disposeBag)
-        
-        fetchGitHubDataTrigger
-            .flatMap { APIClient().fetchGitHubData() }
-            .subscribe(onNext: { self.gitHubsRelay.accept(.just($0)) })
-            .disposed(by: disposeBag)
-    }
-    
-    func fetchQiitaData() {
-        fetchQiitaDataTrigger.accept(())
-    }
-    
-    func fetchGitHubData() {
-        fetchGitHubDataTrigger.accept(())
+    func fetchGitHubData() -> Single<[GitHub]> {
+        APIClient().fetchGitHubData()
     }
     
 }
