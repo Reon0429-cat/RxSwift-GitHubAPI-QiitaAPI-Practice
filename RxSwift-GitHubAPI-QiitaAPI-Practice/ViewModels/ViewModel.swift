@@ -49,36 +49,32 @@ final class ViewModel {
             .disposed(by: disposeBag)
         
         combineButton.asObservable()
-            .subscribe(onNext: {
-                let text = zip(
-                    self.qiitasRelay.value,
-                    self.gitHubsRelay.value
-                ).map {
-                    $0.title.prefix(5).description
-                    + $1.name.prefix(5).description
-                }
-                self.combineTextsRelay.accept(text)
-            })
+            .map {
+                zip(self.qiitasRelay.value, self.gitHubsRelay.value)
+                    .map { $0.title.prefix(5).description + $1.name.prefix(5).description }
+            }
+            .bind(to: combineTextsRelay)
             .disposed(by: disposeBag)
         
         // Output from UseCase
         useCase.qiitas
-            .map { $0.map { Qiita(title: $0.title.prefix(5).description) } }
-            .drive(qiitasRelay)
-            .disposed(by: disposeBag)
-        
-        useCase.qiitaError
-            .drive(onNext: { print($0.localizedDescription) })
-            .disposed(by: disposeBag)
+            .map { $0.map { $0.map { Qiita(title: $0.title.prefix(5).description) } } }
+            .drive {
+                $0.subscribe(
+                    onSuccess: { self.qiitasRelay.accept($0) },
+                    onFailure: { print($0.localizedDescription) }
+                ).disposed(by: self.disposeBag)
+            }.disposed(by: disposeBag)
         
         useCase.gitHubs
-            .map { $0.map { GitHub(name: $0.name.prefix(5).description) } }
-            .drive(gitHubsRelay)
-            .disposed(by: disposeBag)
+            .map { $0.map { $0.map { GitHub(name: $0.name.prefix(5).description) } } }
+            .drive {
+                $0.subscribe(
+                    onSuccess: { self.gitHubsRelay.accept($0) },
+                    onFailure: { print($0.localizedDescription) }
+                ).disposed(by: self.disposeBag)
+            }.disposed(by: disposeBag)
         
-        useCase.gitHubError
-            .drive(onNext: { print($0.localizedDescription) })
-            .disposed(by: disposeBag)
     }
     
 }

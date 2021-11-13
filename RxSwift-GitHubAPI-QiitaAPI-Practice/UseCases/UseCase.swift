@@ -12,52 +12,28 @@ import RxCocoa
 final class UseCase {
     
     private let fetchQiitaDataTrigger = PublishRelay<Void>()
-    private let qiitasRelay = BehaviorRelay<[Qiita]>(value: [])
-    private let qiitaErrorRelay = PublishRelay<Error>()
     private let fetchGitHubDataTrigger = PublishRelay<Void>()
-    private let gitHubsRelay = BehaviorRelay<[GitHub]>(value: [])
-    private let gitHubErrorRelay = PublishRelay<Error>()
+    private let qiitasRelay = BehaviorRelay<Single<[Qiita]>>(value: .just([]))
+    private let gitHubsRelay = BehaviorRelay<Single<[GitHub]>>(value: .just([]))
     private let disposeBag = DisposeBag()
     
-    var qiitas: Driver<[Qiita]> {
+    var qiitas: Driver<Single<[Qiita]>> {
         qiitasRelay.asDriver()
     }
     
-    var qiitaError: Driver<Error> {
-        qiitaErrorRelay.asDriver(onErrorDriveWith: .empty())
-    }
-    
-    var gitHubs: Driver<[GitHub]> {
+    var gitHubs: Driver<Single<[GitHub]>> {
         gitHubsRelay.asDriver()
-    }
-    
-    var gitHubError: Driver<Error> {
-        gitHubErrorRelay.asDriver(onErrorDriveWith: .empty())
     }
     
     init() {
         fetchQiitaDataTrigger
-            .map {
-                APIClient().fetchQiitaData()
-                    .subscribe(
-                        onSuccess: self.qiitasRelay.accept(_:),
-                        onFailure: self.qiitaErrorRelay.accept(_:)
-                    )
-                    .disposed(by: self.disposeBag)
-            }
-            .subscribe()
+            .flatMap { APIClient().fetchQiitaData() }
+            .subscribe(onNext: { self.qiitasRelay.accept(.just($0)) })
             .disposed(by: disposeBag)
         
         fetchGitHubDataTrigger
-            .map {
-                APIClient().fetchGitHubData()
-                    .subscribe(
-                        onSuccess: self.gitHubsRelay.accept(_:),
-                        onFailure: self.gitHubErrorRelay.accept(_:)
-                    )
-                    .disposed(by: self.disposeBag)
-            }
-            .subscribe()
+            .flatMap { APIClient().fetchGitHubData() }
+            .subscribe(onNext: { self.gitHubsRelay.accept(.just($0)) })
             .disposed(by: disposeBag)
     }
     
